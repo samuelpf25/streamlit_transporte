@@ -221,6 +221,50 @@ if (pg == 'Transporte'):
 # limpeza de geladeira / bebedouro
 
 elif (pg == 'Limpeza de Geladeira/Bebedouro'):
+    st.markdown(cabecalho, unsafe_allow_html=True)
+    st.subheader(pg)
+
+
+    #Datas disponíveis
+    with st.expander("Datas Disponíveis"):
+        chave = '1JAz12fD-1-zk0Iraa4dbNC_K8ygb-xHLYQwv5xjf3nM'
+        aba = 'Datas'
+        sheet2, dados2, df2 = conexao(aba=aba, chave=chave)
+
+        datas_disponiveis = []
+        dia_semana = []
+        agendamentos = []
+        disponivel = []
+
+        for dic in dados2:
+            if dic['verificacao'] == 1 and dic['Data'] != '':
+                datas_disponiveis.append(dic['Data'])
+                dia_semana.append(dic['Dia'])
+                agendamentos.append(dic['Quantidade de Agendamentos'])
+                disponivel.append(dic['Data Disponível'])
+
+        data_disponivel = st.selectbox('Selecione a data', datas_disponiveis)
+        n = datas_disponiveis.index(data_disponivel)
+
+        with st.form(key='my_form2'):
+            print(n)
+            print(dia_semana[n])
+            st.markdown(padrao + '<p><b>Dia da semana</b>: ' + str(dia_semana[n]) + '</p>',
+                        unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Quantidade de agendamentos no dia</b>: ' + str(agendamentos[n]) + '</p>', unsafe_allow_html=True)
+            disponibilidade = st.selectbox('Data disponível?',['Sim','Não'],index=['Sim','Não'].index(disponivel[n]))
+            s1 = st.text_input("Senha:", value="", type="password")
+            botao1 = st.form_submit_button('Registrar')
+            celula1 = sheet2.find(data_disponivel)
+            if (botao1 == True and s1 == a):
+                with st.spinner('Registrando dados...'):
+                    try:
+                        sheet2.update_acell('D' + str(celula1.row), disponibilidade)
+                        st.success('Dados registrados!')
+                    except Exception as e:
+                        st.error('Ocorreu um erro ao tentar registrar os dados! ' + str(e))
+
+    #Respostas Editáveis
     chave = '1JAz12fD-1-zk0Iraa4dbNC_K8ygb-xHLYQwv5xjf3nM'
     aba = 'Respostas Editável'
     sheet1, dados1, df1 = conexao(aba=aba, chave=chave)
@@ -238,8 +282,7 @@ elif (pg == 'Limpeza de Geladeira/Bebedouro'):
     fotos = []
     hora = []
 
-    st.markdown(cabecalho, unsafe_allow_html=True)
-    st.subheader(pg)
+
     status_selecionar = st.selectbox('Filtrar por Status:', todos_status1)
     ch_posterior = st.checkbox('Somente solicitações a executar ou posteriores a hoje', value=True)
 
