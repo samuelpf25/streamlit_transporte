@@ -182,7 +182,7 @@ if (pg == 'Transporte'):
             if (data_ag == ''):
                 data_ag = datetime.strptime("01-01-2021", '%d-%m-%Y')
 
-            data_agendamento = st.date_input('Data de Transporte e Limpeza de Geladeira (ANO/MÊS/DIA)', value=data_ag)
+            data_agendamento = st.date_input('Data de Transporte (ANO/MÊS/DIA)', value=data_ag)
             celula = sheet.find(codigo[n])
             status_alterado = st.selectbox('Selecione o status:', todos_status, index=todos_status.index(status[n]))
             obsemail_texto = st.text_area('Observação para o usuário: ', value=obsemail[n])
@@ -224,7 +224,7 @@ elif (pg == 'Limpeza de Geladeira/Bebedouro'):
     chave = '1JAz12fD-1-zk0Iraa4dbNC_K8ygb-xHLYQwv5xjf3nM'
     aba = 'Respostas Editável'
     sheet1, dados1, df1 = conexao(aba=aba, chave=chave)
-    todos_status1 = ['', 'Procedente', 'Cancelada', 'Data Não Disponível', 'Não Procedente', 'Manutenção']
+    todos_status1 = ['', 'Procedente', 'Finalizada', 'Cancelada', 'Data Não Disponível', 'Não Procedente', 'Manutenção']
     predio = []
     sala = []
     nome = []
@@ -254,7 +254,7 @@ elif (pg == 'Limpeza de Geladeira/Bebedouro'):
                 telefone.append(dic['Telefone'])
                 descricao.append(dic['Observações'])
                 status.append(dic['Status'])
-                data_limpeza.append(dic['Data da Limpeza'])
+                data_limpeza.append(dic['Data Texto'])
                 obsemail.append(dic['Obs E-mail'])
                 obsinterna.append(dic['Obs Interna'])
                 codigo.append(dic['Nº da Solicitação'])
@@ -269,7 +269,7 @@ elif (pg == 'Limpeza de Geladeira/Bebedouro'):
                 telefone.append(dic['Telefone'])
                 descricao.append(dic['Observações'])
                 status.append(dic['Status'])
-                data_limpeza.append(dic['Data da Limpeza'])
+                data_limpeza.append(dic['Data Texto'])
                 obsemail.append(dic['Obs E-mail'])
                 obsinterna.append(dic['Obs Interna'])
                 codigo.append(dic['Nº da Solicitação'])
@@ -291,20 +291,37 @@ elif (pg == 'Limpeza de Geladeira/Bebedouro'):
             # (midia)
             # apresentar dados da solicitação
             st.markdown(titulo + '<p><b>Dados da Solicitação</b></p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Nome</b>:<p> ' + str(nome[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Telefone</b>:<p> ' + str(telefone[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Prédio</b>:<p> ' + str(predio[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Sala</b>:<p> ' + str(sala[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + "<b>Fotos/Vídeos</b>:<p> " + midia + "</p>", unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Descrição</b>:<p> ' + descricao[n] + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Data</b>: <p>' + str(data_limpeza[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Hora</b>: <p>' + str(hora[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Status Atual</b>:<p> ' + str(status[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Nome</b>: ' + str(nome[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Telefone</b>: ' + str(telefone[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Prédio</b>: ' + str(predio[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Sala</b>: ' + str(sala[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + "<p><b>Fotos/Vídeos</b>: " + midia + "</p>", unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Descrição</b>: ' + descricao[n] + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Data</b>: ' + str(data_limpeza[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Hora</b>: ' + str(hora[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Status Atual</b>: ' + str(status[n]) + '</p>', unsafe_allow_html=True)
 
             # Data
-
+            horarios = ['','09:00 h','10:00 h','11:00 h','12:00 h','13:00 h','14:00 h','15:00 h','16:00 h']
             celula = sheet1.find(codigo[n])
             status_alterado = st.selectbox('Selecione o status:', todos_status1, index=todos_status1.index(status[n]))
+            horarios_agendamento = st.selectbox('Selecione o horario:', horarios, index=horarios.index(hora[n]))
+            # Data
+            d = '01/01/2023'
+            # print('Data Agendamento registrada: ' + d_agend[n])
+            if (data_limpeza[n] != ''):
+                d = data_limpeza[n]
+            else:
+                # st.text('OS sem agendamento registrado ou com data de agendamento anterior a hoje!')
+                print('Sem data registrada')
+            d = d.replace('/', '-')
+
+            data_ag = datetime.strptime(d, '%d-%m-%Y')
+
+            if (data_ag == ''):
+                data_ag = datetime.strptime("01-01-2023", '%d-%m-%Y')
+
+            data_agendamento = st.date_input('Data da Limpeza de Geladeira (ANO/MÊS/DIA)', value=data_ag)
             obsemail_texto = st.text_area('Observação para o usuário: ', value=obsemail[n])
             obsinterna_texto = st.text_area('Observação interna: ', value=obsinterna[n])
 
@@ -315,6 +332,10 @@ elif (pg == 'Limpeza de Geladeira/Bebedouro'):
 
                 with st.spinner('Registrando dados...'):
                     try:
+                        data = data_agendamento
+                        data_formatada = str(data.day) + '/' + str(data.month) + '/' + str(data.year)
+                        sheet.update_acell('W' + str(celula.row), data_formatada)
+                        sheet.update_acell('AG' + str(celula.row), horarios_agendamento)
                         sheet1.update_acell('K' + str(celula.row), status_alterado)
                         sheet1.update_acell('O' + str(celula.row), obsemail_texto)
                         sheet1.update_acell('P' + str(celula.row), obsinterna_texto)
