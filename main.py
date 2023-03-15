@@ -377,8 +377,8 @@ elif (pg == 'Limpeza de Geladeira/Bebedouro'):
                     try:
                         data = data_agendamento
                         data_formatada = str(data.day) + '/' + str(data.month) + '/' + str(data.year)
-                        sheet.update_acell('W' + str(celula.row), data_formatada)
-                        sheet.update_acell('AG' + str(celula.row), horarios_agendamento)
+                        sheet1.update_acell('W' + str(celula.row), data_formatada)
+                        sheet1.update_acell('AG' + str(celula.row), horarios_agendamento)
                         sheet1.update_acell('K' + str(celula.row), status_alterado)
                         sheet1.update_acell('O' + str(celula.row), obsemail_texto)
                         sheet1.update_acell('P' + str(celula.row), obsinterna_texto)
