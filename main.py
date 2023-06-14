@@ -1,3 +1,5 @@
+#atualizado em 14/06/2023
+
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -162,8 +164,8 @@ if (pg == 'Transporte'):
                         unsafe_allow_html=True)
             st.markdown(padrao + "<b>Fotos/Vídeos</b>:<p> " + midia + "</p>", unsafe_allow_html=True)
             st.markdown(padrao + '<b>Quantidade</b>:<p> ' + str(qtd[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Descrição</b>:<p> ' + descricao[n] + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Telefone</b>:<p> ' + descricao[n] + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<b>Descrição</b>:<p> ' + str(descricao[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<b>Telefone</b>:<p> ' + str(telefone[n]) + '</p>', unsafe_allow_html=True)
             st.markdown(padrao + '<b>Data</b>: <p>' + str(data_agendamento[n]) + '</p>', unsafe_allow_html=True)
             st.markdown(padrao + '<b>Status Atual</b>:<p> ' + str(status[n]) + '</p>', unsafe_allow_html=True)
 
