@@ -151,26 +151,26 @@ if (pg == 'Transporte'):
             # (midia)
             # apresentar dados da solicitação
             st.markdown(titulo + '<p><b>Dados da Solicitação</b></p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Nome</b>:<p> ' + str(nome[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Telefone</b>:<p> ' + str(telefone[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Prédio de Origem</b>:<p> ' + str(origem_predio[n]) + '</p>',
+            st.markdown(padrao + '<p><b>Nome</b>: ' + str(nome[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Telefone</b>: ' + str(telefone[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Prédio de Origem</b>: ' + str(origem_predio[n]) + '</p>',
                         unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Sala de Origem</b>:<p> ' + str(origem_sala[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Prédio de Destino</b>:<p> ' + str(destino_predio[n]) + '</p>',
+            st.markdown(padrao + '<p><b>Sala de Origem</b>: ' + str(origem_sala[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Prédio de Destino</b>: ' + str(destino_predio[n]) + '</p>',
                         unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Sala de Destino</b>:<p> ' + str(destino_sala[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Tipos de Materiais</b>:<p> ' + str(tipos[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Bens com patrimônio?</b>:<p> ' + str(patrimonio[n]) + '</p>',
+            st.markdown(padrao + '<p><b>Sala de Destino</b>: ' + str(destino_sala[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Tipos de Materiais</b>: ' + str(tipos[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Bens com patrimônio?</b>: ' + str(patrimonio[n]) + '</p>',
                         unsafe_allow_html=True)
-            st.markdown(padrao + "<b>Fotos/Vídeos</b>:<p> " + midia + "</p>", unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Quantidade</b>:<p> ' + str(qtd[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Descrição</b>:<p> ' + str(descricao[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + "<p><b>Fotos/Vídeos</b>: " + midia + "</p>", unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Quantidade</b>: ' + str(qtd[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Descrição</b>: ' + str(descricao[n]) + '</p>', unsafe_allow_html=True)
             #st.markdown(padrao + '<b>Telefone</b>:<p> ' + str(telefone[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Data</b>: <p>' + str(data_agendamento[n]) + '</p>', unsafe_allow_html=True)
-            st.markdown(padrao + '<b>Status Atual</b>:<p> ' + str(status[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Data</b>: ' + str(data_agendamento[n]) + '</p>', unsafe_allow_html=True)
+            st.markdown(padrao + '<p><b>Status Atual</b>: ' + str(status[n]) + '</p>', unsafe_allow_html=True)
 
             # Data
-            d = '01/01/2021'
+            d = '01/01/2023'
             # print('Data Agendamento registrada: ' + d_agend[n])
             if (data_agendamento[n] != ''):
                 d = data_agendamento[n]
@@ -182,7 +182,7 @@ if (pg == 'Transporte'):
             data_ag = datetime.strptime(d, '%d-%m-%Y')
 
             if (data_ag == ''):
-                data_ag = datetime.strptime("01-01-2021", '%d-%m-%Y')
+                data_ag = datetime.strptime("01-01-2023", '%d-%m-%Y')
 
             data_agendamento = st.date_input('Data de Transporte (ANO/MÊS/DIA)', value=data_ag)
             celula = sheet.find(codigo[n])
