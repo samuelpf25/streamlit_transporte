@@ -1,4 +1,4 @@
-#atualizado em 14/06/2023
+#atualizado em 15/06/2023
 
 from datetime import datetime
 import gspread
@@ -106,7 +106,7 @@ if (pg == 'Transporte'):
                 obsinterna.append(dic['Obs para os Carregadores'])
                 telefone.append(dic['Telefone'])
                 codigo.append(dic['Código'])
-                fotos.append(dic['Foto / Vídeo - Importante para o adequado planejamento do transporte'])
+                fotos.append(dic['Fotos'])
         else:
             if dic['Carimbo de data/hora'] != '' and dic['Status'] == status_selecionar and dic['Código'] != '':
                 origem_predio.append(dic['Origem - Prédio'])
@@ -125,7 +125,7 @@ if (pg == 'Transporte'):
                 obsinterna.append(dic['Obs para os Carregadores'])
                 telefone.append(dic['Telefone'])
                 codigo.append(dic['Código'])
-                fotos.append(dic['Foto / Vídeo - Importante para o adequado planejamento do transporte'])
+                fotos.append(dic['Fotos'])
 
     if status_selecionar == '' and len(codigo)>0:
         if len(codigo)==1:
@@ -147,7 +147,8 @@ if (pg == 'Transporte'):
             links = links.split(',')
             midia = ""
             for i in range(len(links)):
-                midia = midia + "<a href='" + links[i] + "'>Mídia " + str(i + 1) + "</a> | "
+                if (links[i]!=''):
+                    midia = midia + "<p><a href='" + links[i] + "'>Mídia " + str(i + 1) + "</a></p>"
             # (midia)
             # apresentar dados da solicitação
             st.markdown(titulo + '<p><b>Dados da Solicitação</b></p>', unsafe_allow_html=True)
