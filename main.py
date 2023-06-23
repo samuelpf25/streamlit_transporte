@@ -1,4 +1,4 @@
-#atualizado em 15/06/2023
+#atualizado em 23/06/2023
 
 from datetime import datetime
 import gspread
@@ -487,10 +487,12 @@ elif pg == 'Galão de Água':
         entr = 0
         for j in predio:
             if j == pr and entregue[k] == '':
-                n += quantidade[k]
+                if quantidade[k]!='':
+                    n += int(quantidade[k])
                 o = 0
                 if entregue[k]!='':
-                    o=quantidade[k]
+                    if quantidade[k] != '':
+                        o=int(quantidade[k])
                 entr += o
 
             k += 1
