@@ -8,8 +8,21 @@ import pandas as pd
 from io import BytesIO
 
 scope = ['https://spreadsheets.google.com/feeds']
-k = "456"
-creds = ServiceAccountCredentials.from_json_keyfile_name("controle.json", scope)
+k = st.secrets["senha"]
+json = {
+    "auth_provider_x509_cert_url":st.secrets["auth_provider_x509_cert_url"],
+    "auth_uri":st.secrets["auth_uri"],
+    "client_email":st.secrets["client_email"],
+    "client_id":st.secrets["client_id"],
+    "client_x509_cert_url":st.secrets["client_x509_cert_url"],
+    "private_key":st.secrets["private_key"],
+    "private_key_id":st.secrets["private_key_id"],
+    "project_id":st.secrets["project_id"],
+    "token_uri":st.secrets["token_uri"],
+    "type":st.secrets["type"]
+}
+
+creds = ServiceAccountCredentials.from_json_keyfile_dict(json, scope)
 
 cliente = gspread.authorize(creds)
 
