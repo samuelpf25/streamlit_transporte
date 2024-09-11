@@ -761,7 +761,9 @@ elif pg == 'Controle de Galões':
         falta_de_agua = st.checkbox('Falta de água no estoque?', value=sheet1.get('A10'))
         data = st.date_input('Selecione a data para reagendamento')
         data_formatada = str(data.day) + '/' + str(data.month) + '/' + str(data.year)
-        qt = st.selectbox('Selecione a quantidade para reagendar na data indicada acima',[0].extend([(i+1) for i in range(len(codigo))]))
+        lista_nova = [0]
+        lista_nova = lista_nova + [(i+1) for i in range(len(codigo))]
+        qt = st.selectbox('Selecione a quantidade para reagendar na data indicada acima',lista_nova)
 
         botao = st.form_submit_button('Registrar')
 
